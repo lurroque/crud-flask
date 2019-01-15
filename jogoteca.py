@@ -5,17 +5,16 @@ app = Flask(__name__)
 
 lista_de_jogos = []
 
-
 @app.route("/")
 def index():
     return render_template("index.html", 
-                           titulo="Jogos",
-                           jogos=lista_de_jogos)
+                            titulo="Jogos",
+                            jogos=lista_de_jogos)
 
 @app.route("/novo")
 def novo_jogo():
     return render_template("novo-jogo.html",
-                           titulo="Novo Jogo")
+                            titulo="Novo Jogo")
 
 @app.route("/criar", methods=["POST",])
 def criar_novojogo():
@@ -26,6 +25,21 @@ def criar_novojogo():
     lista_de_jogos.append(jogo)
 
     return redirect("/")
+
+@app.route("/login")
+def login():
+    return render_template("login.html",
+                            titulo="Faça seu login")
+
+@app.route("/autenticar", methods=["POST",])
+def autenticar():
+    usuario = request.form["usuario"]
+    senha = request.form["senha"]
+    if senha == "mestra":
+        return redirect("/")
+    else:
+        return redirect("/login")
+        
 
 app.run(debug=True)
 
