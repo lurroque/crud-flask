@@ -7,12 +7,14 @@ lista_de_jogos = []
 
 @app.route("/")
 def index():
+
     return render_template("index.html", 
                             titulo="Jogos",
                             jogos=lista_de_jogos)
 
 @app.route("/novo")
 def novo_jogo():
+
     return render_template("novo-jogo.html",
                             titulo="Novo Jogo")
 
@@ -28,6 +30,7 @@ def criar_novojogo():
 
 @app.route("/login")
 def login():
+    
     return render_template("login.html",
                             titulo="Faça seu login")
 
@@ -37,9 +40,6 @@ def autenticar():
     senha = request.form["senha"]
     if senha == "mestra":
         return redirect("/")
-    else:
-        return redirect("/login")
+    return redirect("/login")
         
-
 app.run(debug=True)
-
