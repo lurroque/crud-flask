@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session, flash
 from jogo import Jogo
 
 app = Flask(__name__)
-app.secret_key = "Zanguerson!"
+app.secret_key = "ASUDhwiqoudhsaqioweu!@3oasd23897a&%65"
 
 lista_de_jogos = []
 
@@ -18,7 +18,8 @@ def index():
 def novo_jogo():
 
     return render_template("novo-jogo.html",
-                            titulo="Novo Jogo")
+                            titulo="Novo Jogo"
+    )
 
 @app.route("/criar", methods=["POST",])
 def criar_novojogo():
@@ -34,7 +35,8 @@ def criar_novojogo():
 def login():
     
     return render_template("login.html",
-                            titulo="Faça seu login")
+                            titulo="Faça seu login"
+    )
 
 @app.route("/autenticar", methods=["POST",])
 def autenticar():
@@ -42,7 +44,8 @@ def autenticar():
     senha = request.form["senha"]
     if senha == "mestra":
         session["usuario_logado"] = usuario
-        flash("{} logado com sucesso!".format(usuario))
+        flash("Login efetuado com sucesso!")
+        flash("Bem-vindo, {}!".format(usuario.title()))
         return redirect("/")
     flash("Usuário ou senha incorretos, tente novamente!")
     return redirect("/login")
