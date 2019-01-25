@@ -54,7 +54,7 @@ def autenticar():
 def logout():
     session["usuario_logado"] = None
     flash("Nenhum usuário logado")
-    
+
     return redirect("/")
         
 app.run(debug=True)
