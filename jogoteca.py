@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, flash
 from jogo import Jogo
 
+
 app = Flask(__name__)
 app.secret_key = "ASUDhwiqoudhsaqioweu!@3oasd23897a&%65"
 
@@ -9,17 +10,15 @@ lista_de_jogos = []
 
 @app.route("/")
 def index():
-    return render_template("index.html",
-                           titulo="Jogos",
-                           jogos=lista_de_jogos
-    )
+    return render_template("index.html", titulo="Jogos", jogos=lista_de_jogos)
 
 
 @app.route("/novo")
 def novo_jogo():
-    return render_template("novo-jogo.html",
-                           titulo="Novo Jogo"
-    )
+    if "usuario_logado" not in session or session["usuario_logado"] == None:
+        flash("Você não está logado.")
+        return redirect("/login")
+    return render_template("novo-jogo.html", titulo="Novo Jogo")
 
 
 @app.route("/criar", methods=["POST", ])
@@ -34,9 +33,7 @@ def criar_novojogo():
 
 @app.route("/login")
 def login():
-    return render_template("login.html",
-                           titulo="Faça seu login"
-    )
+    return render_template("login.html", titulo="Faça seu login")
 
 
 @app.route("/autenticar", methods=["POST", ])
